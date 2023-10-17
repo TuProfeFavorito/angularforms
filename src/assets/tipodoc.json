@@ -1,0 +1,5 @@
+[
+    { "id": 1, "value": "DNI", "name": "DNI", "cant": 8 },
+    { "id": 2, "value": "C.E.", "name": "Carné de extranjería", "cant": 20 },
+    { "id": 3, "value": "RUC", "name": "RUC", "cant": 11 }
+]

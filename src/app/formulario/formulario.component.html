@@ -1,0 +1,58 @@
+<section class="formCore">
+    <h1>Escríbenos</h1>
+    <form (ngSubmit)="onSubmit()">
+        <div class="formCore__input">
+            <label for="opcion">Selecciona el tipo de documento:</label>
+            <select id="opcion" name="opcion" [(ngModel)]="data.tipodocumento" (change)="onTipoDocumentoChange($event)" required>
+                <option *ngFor="let type of tipoDoc" [attr.data-cant]="type.cant" [value]="type.value">{{ type.name }}</option>
+            </select>
+        </div>
+        <div class="formCore__input">
+            <label for="num_documento">Número de documento:</label>
+            <input type="text" id="num_documento" [(ngModel)]="data.num_documento" name="num_documento" [maxlength]="maxCaracteres" (change)="onInputNumber($event)" required>
+        </div>
+        <div class="formCore__input">
+            <label for="num_documento">Nombres y Apellidos</label>
+            <input type="text" id="nombres_apellidos" [(ngModel)]="data.nombres_apellidos" name="nombres_apellidos"/>
+        </div>
+        <div class="formCore__input">
+            <label for="num_documento">Celular</label>
+            <input type="tel" id="celular" [(ngModel)]="data.celular" name="celular"/>
+        </div>
+        <div class="formCore__input">
+            <label for="email">Email</label>
+            <input type="email" id="email" [(ngModel)]="data.email" name="email" required>
+        </div>
+        <div class="formCore__input">
+            <label for="departamento">Departamento</label>
+            <select id="departamento" name="departamento" [(ngModel)]="data.departamento" (change)="onDepartamentoChange($event)" required>
+                <option *ngFor="let type of departamentos" [attr.data-id]="type.id" [value]="type.name">{{ type.name }}</option>
+            </select>
+        </div>
+        <div class="formCore__input">
+            <label for="provincia">Provincia</label>
+            <select id="provincia" name="provincia" [(ngModel)]="data.provincia" (change)="onProvinciaChange($event)" required>
+                <option *ngFor="let type of provincias" [attr.data-id]="type.id" [value]="type.name">{{ type.name }}</option>
+            </select>
+        </div>
+        <div class="formCore__input">
+            <label for="distrito">Distrito</label>
+            <select id="distrito" name="distrito" [(ngModel)]="data.distrito" required>
+                <option *ngFor="let type of distritos" [attr.data-id]="type.id" [value]="type.name">{{ type.name }}</option>
+            </select>
+        </div>
+        <div class="formCore__input">
+            <label for="num_contrato">Número de contrato</label>
+            <input type="tel" id="num_contrato" [(ngModel)]="data.num_contrato" name="num_contrato"/>
+        </div>
+        <div class="formCore__input">
+            <label for="grupo">Grupo</label>
+            <input type="tel" id="grupo" [(ngModel)]="data.grupo" name="grupo"/>
+        </div>
+        <div class="formCore__input">
+            <label for="cupo">Cupo</label>
+            <input type="tel" id="cupo" [(ngModel)]="data.cupo" name="cupo"/>
+        </div>
+        <button type="submit">Iniciar sesión</button>
+    </form>
+</section>
