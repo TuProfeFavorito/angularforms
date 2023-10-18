@@ -1,0 +1,4 @@
+[
+    { "id": 1, "value": "CONSULTA", "name": "Consulta" },
+    { "id": 2, "value": "SOLICITUD", "name": "Solicitud" }
+]

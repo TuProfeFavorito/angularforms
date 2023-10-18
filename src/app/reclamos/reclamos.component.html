@@ -1,0 +1,168 @@
+<section class="formCore">
+    <div class="x-container">
+        <h1>Libro de Reclamaciones</h1>
+        <form (ngSubmit)="onSubmit()">
+            <div class="formCore__row">
+                <div class="formCore__input">
+                    <label for="opcion">Selecciona el tipo de documento:</label>
+                    <select id="opcion" name="opcion" [(ngModel)]="data.tipodocumento" (change)="onTipoDocumentoChange($event)" required>
+                        <option *ngFor="let type of tipoDoc" [attr.data-cant]="type.cant" [value]="type.value">{{ type.name }}</option>
+                    </select>
+                </div>
+                <div class="formCore__input">
+                    <label for="num_documento">Número de documento:</label>
+                    <input type="text" id="num_documento" [(ngModel)]="data.num_documento" name="num_documento" [maxlength]="maxCaracteres" (change)="onInputNumber($event)" required>
+                </div>
+            </div>
+            <div class="formCore__row">
+                <div class="formCore__input">
+                    <label for="nombres">Nombres</label>
+                    <input type="text" id="nombres" [(ngModel)]="data.nombres" name="nombres"/>
+                </div>
+                <div class="formCore__input">
+                    <label for="apellidos">Apellidos</label>
+                    <input type="text" id="apellidos" [(ngModel)]="data.apellidos" name="apellidos"/>
+                </div>
+            </div>
+            <div class="formCore__row">
+                <div class="formCore__input">
+                    <label for="num_documento">Teléfono</label>
+                    <input type="tel" id="celular" [(ngModel)]="data.celular" name="celular"/>
+                </div>
+                <div class="formCore__input">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" [(ngModel)]="data.email" name="email" required>
+                </div>
+            </div>
+            <div class="formCore__row element-3">
+                <div class="formCore__input">
+                    <label for="departamento">Departamento</label>
+                    <select id="departamento" name="departamento" [(ngModel)]="data.departamento" (change)="onDepartamentoChange($event)" required>
+                        <option *ngFor="let type of departamentos" [attr.data-id]="type.id" [value]="type.name">{{ type.name }}</option>
+                    </select>
+                </div>
+                <div class="formCore__input">
+                    <label for="provincia">Provincia</label>
+                    <select id="provincia" name="provincia" [(ngModel)]="data.provincia" (change)="onProvinciaChange($event)" required>
+                        <option *ngFor="let type of provincias" [attr.data-id]="type.id" [value]="type.name">{{ type.name }}</option>
+                    </select>
+                </div>
+                <div class="formCore__input">
+                    <label for="distrito">Distrito</label>
+                    <select id="distrito" name="distrito" [(ngModel)]="data.distrito" required>
+                        <option *ngFor="let type of distritos" [attr.data-id]="type.id" [value]="type.name">{{ type.name }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="formCore__row element-1">
+                <div class="formCore__input">
+                    <label for="direccion">Dirección</label>
+                    <input type="tel" id="direccion" [(ngModel)]="data.direccion" name="direccion"/>
+                </div>
+            </div>
+            <div class="formCore__row">
+                <div class="formCore__input">
+                    <label for="num_documento">Tienda</label>
+                    <select id="tienda" name="tienda" [(ngModel)]="data.tienda" required>
+                        <option *ngFor="let type of tiendas" [value]="type.value">{{ type.name }}</option>
+                    </select>
+                </div>
+                <div class="formCore__input">
+                    <label for="reclamo">Reclamo o queja</label>
+                    <select id="reclamo" name="reclamo" [(ngModel)]="data.reclamo" required>
+                        <option *ngFor="let type of reclamos" [value]="type.value">{{ type.name }}</option>
+                    </select>
+                </div>
+            </div>            
+            <div class="formCore__row element-3">
+                <div class="formCore__input">
+                    <label for="num_documento">Producto o servicio</label>
+                    <select id="producto" name="producto" [(ngModel)]="data.producto" required>
+                        <option *ngFor="let type of productos" [value]="type.value">{{ type.name }}</option>
+                    </select>
+                </div>
+                <div class="formCore__input">
+                    <label for="descripcionproducto">Descripción del producto o servicio</label>
+                    <input type="text" id="descripcionproducto" [(ngModel)]="data.descripcionproducto" name="descripcionproducto"/>
+                </div>
+                <div class="formCore__input">
+                    <label for="monto">Monto reclamado</label>
+                    <input type="text" id="monto" [(ngModel)]="data.monto" name="monto"/>
+                </div>
+            </div>
+            <div class="formCore__row element-1">
+                <div class="formCore__input">
+                    <label for="menor">
+                        <input type="checkbox" #myCheckbox (change)="onCheckboxChange(myCheckbox.checked)"/>
+                        <p>Soy menor de edad</p>
+                    </label>
+                </div>
+            </div>
+            <div class="formCoreContent" *ngIf="mostrarPaternal">
+                <div class="titlemy">
+                    <h2>Datos del padre, madre o representante</h2>
+                    <p>Para el caso de menores de edad</p>
+                </div>
+                <div class="formCore__row">
+                    <div class="formCore__input">
+                        <label for="nombres_padre">Nombres</label>
+                        <input type="text" id="nombres_padre" [(ngModel)]="data.nombres_padre" name="nombres_padre"/>
+                    </div>
+                    <div class="formCore__input">
+                        <label for="apellidos_padre">Apellidos</label>
+                        <input type="text" id="apellidos_padre" [(ngModel)]="data.apellidos_padre" name="apellidos_padre"/>
+                    </div>
+                </div>
+                <div class="formCore__row">
+                    <div class="formCore__input">
+                        <label for="type_telefono_padre">Tipo de celular</label>
+                        <select id="type_telefono_padre" name="type_telefono_padre" [(ngModel)]="data.type_telefono_padre" >
+                            <option value="CASA">Casa</option>
+                            <option value="CELULAR">Celular</option>
+                            <option value="OFICINA">Oficina</option>
+                        </select>
+                    </div>
+                    <div class="formCore__input">
+                        <label for="telefono_padre">Número</label>
+                        <input type="tel" id="telefono_padre" [(ngModel)]="data.telefono_padre" name="telefono_padre"/>
+                    </div>
+                </div>
+                <div class="formCore__row">
+                    <div class="formCore__input">
+                        <label for="email_padre">Email</label>
+                        <input type="email" id="email_padre" [(ngModel)]="data.email_padre" name="email_padre">
+                    </div>
+                    <div class="formCore__input">
+                        <label for="direccion_padre">Dirección</label>
+                        <input type="tel" id="direccion_padre" [(ngModel)]="data.direccion_padre" name="direccion_padre"/>
+                    </div>
+                </div>
+                <div class="formCore__row element-3">
+                    <div class="formCore__input">
+                        <label for="departamento_padre">Departamento</label>
+                        <select id="departamento_padre" name="departamento_padre" [(ngModel)]="data.departamento_padre" (change)="onDepartamentoPadreChange($event)">
+                            <option *ngFor="let type of departamentos_padre" [attr.data-id]="type.id" [value]="type.name">{{ type.name }}</option>
+                        </select>
+                    </div>
+                    <div class="formCore__input">
+                        <label for="provincia_padre">Provincia</label>
+                        <select id="provincia_padre" name="provincia_padre" [(ngModel)]="data.provincia_padre" (change)="onProvinciaPadreChange($event)">
+                            <option *ngFor="let type of provincias_padre" [attr.data-id]="type.id" [value]="type.name">{{ type.name }}</option>
+                        </select>
+                    </div>
+                    <div class="formCore__input">
+                        <label for="distrito_padre">Distrito</label>
+                        <select id="distrito_padre" name="distrito_padre" [(ngModel)]="data.distrito_padre">
+                            <option *ngFor="let type of distritos_padre" [attr.data-id]="type.id" [value]="type.name">{{ type.name }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="formCoreContent">
+                <div class="titlemy">
+                    <h2>Detalle de la reclamación</h2>
+                </div>                
+            </div>
+        </form>
+    </div>
+</section>

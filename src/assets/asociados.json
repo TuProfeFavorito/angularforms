@@ -1,0 +1,6 @@
+[
+    { "id": 1, "value": "NO ADJUDICADO", "name": "No adjudicado" },
+    { "id": 2, "value": "ADJUDICADO SIN VEHICULO", "name": "Adjudicado sin vehículo entregado" },
+    { "id": 3, "value": "ADJUDICADO CON VEHICULO", "name": "Adjudicado con vehículo entregado" },
+    { "id": 4, "value": "CONTRATO RESUELTO", "name": "Con contrato resuelto por falta de pago" }
+]

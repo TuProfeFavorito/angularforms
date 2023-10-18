@@ -9,11 +9,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormularioComponent } from './formulario/formulario.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReclamosComponent } from './reclamos/reclamos.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { PaternalformComponent } from './paternalform/paternalform.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FormularioComponent
+    FormularioComponent,
+    ReclamosComponent,
+    HeaderComponent,
+    FooterComponent,
+    PaternalformComponent
   ],
   imports: [
     BrowserModule,

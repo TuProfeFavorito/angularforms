@@ -3,6 +3,9 @@ import { TipodocService } from '../services/tipodoc.service';
 import { DepartamentosService } from '../services/ubigeo/departamentos.service';
 import { ProvinciasService } from '../services/ubigeo/provincias.service';
 import { DistritosService } from '../services/ubigeo/distritos.service';
+import { AsociadoService } from '../services/asociado.service';
+import { TiporequerimientoService } from '../services/tiporequerimiento.service';
+
 
 @Component({
   selector: 'app-formulario',
@@ -16,6 +19,9 @@ export class FormularioComponent implements OnInit {
   departamentos: any[] = [];
   provincias: any[] = [];
   distritos: any[] = [];
+  asociados: any[] = [];
+  requerimientos: any[] = [];
+  Myfile: File | null = null;
   data = {
     tipodocumento: '',
     num_documento: '',
@@ -27,15 +33,35 @@ export class FormularioComponent implements OnInit {
     distrito: '',
     num_contrato: '',
     grupo: '',
-    cupo: ''
+    cupo: '',
+    asociado: '',
+    requerimiento : '',
+    mensaje: '',
+    terminos: 'SI'
   };
 
   constructor(
     private tipoDocService: TipodocService, 
     private departamentosService: DepartamentosService,
     private provinciasService: ProvinciasService,
-    private distritosService: DistritosService
+    private distritosService: DistritosService,
+    private asociadoService: AsociadoService,
+    private tiporequerimientoService: TiporequerimientoService    
   ) {}  
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+
+    if (file) {
+      // Aquí puedes hacer lo que quieras con el archivo seleccionado, por ejemplo, cargarlo a un servidor.
+      console.log('Archivo seleccionado:', file, file.name);
+      this.Myfile = file;
+    }
+  }
+
+  onCheckboxChange(checked: boolean) {
+    this.data.terminos = (checked) ? "SI" : "NO";    
+  }
   
   onDepartamentoChange(event: Event) {
     const selectElement = event.target as HTMLSelectElement;
@@ -86,9 +112,20 @@ export class FormularioComponent implements OnInit {
     this.departamentosService.getOpciones().subscribe(data => {
       this.departamentos = data;
     });
+    this.asociadoService.getOpciones().subscribe(data => {
+      this.asociados = data;
+    });
+    this.asociadoService.getOpciones().subscribe(data => {
+      this.asociados = data;
+    });
+    this.tiporequerimientoService.getOpciones().subscribe(data => {
+      this.requerimientos = data;
+    });
   }
 
   onSubmit() {
-    console.log(this.data);
+    const formData = new FormData();
+    formData.append('file', this.Myfile!, this.Myfile!.name);
+    formData.append('file', this.Myfile!, this.Myfile!.name);
   }
 }
