@@ -15,6 +15,7 @@ import { ProductoservicioService } from '../services/productoservicio.service';
 export class ReclamosComponent {
   selectedTipoDoc: string = '';
   maxCaracteres: number = 8;
+  invalidbutton: boolean = false;
   tipoDoc: any[] = [];
   departamentos: any[] = [];
   provincias: any[] = [];
@@ -26,6 +27,8 @@ export class ReclamosComponent {
   reclamos: any[] = [];
   productos: any[] = [];
   mostrarPaternal: boolean = false;
+  disabledPoints: boolean = false;
+  Myfile: File | null = null;
   data = {
     tipodocumento: '',
     num_documento: '',
@@ -52,6 +55,13 @@ export class ReclamosComponent {
     departamento_padre: '',
     provincia_padre: '',    
     distrito_padre: '',
+    detalle: '',
+    cliente: 'SI',
+    cliente_contrato: '',
+    cliente_grupo: '',
+    cliente_cupo: '',
+    cliente_respuesta: '',
+    terms: ''
   };
   constructor(
     private tipoDocService: TipodocService,
@@ -121,7 +131,23 @@ export class ReclamosComponent {
     this.data.terminos = (checked) ? "SI" : "NO"; 
     this.mostrarPaternal = (checked) ? true : false; 
   }
+  onCheckboxClientChange(checked: boolean) {
+    this.data.cliente = (checked) ? "SI" : "NO"; 
+    this.disabledPoints = (checked) ? false : true; 
+  }
+  onCheckboxTermsChange(checked: boolean) {
+    this.data.terms = (checked) ? "SI" : "NO"; 
+    this.invalidbutton = (checked) ? false : true;
+  }
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
 
+    if (file) {
+      // Aquí puedes hacer lo que quieras con el archivo seleccionado, por ejemplo, cargarlo a un servidor.
+      console.log('Archivo seleccionado:', file, file.name);
+      this.Myfile = file;
+    }
+  }
   onInputNumber(event: any) {
     // No permitir que se ingresen letras
     const numericValue = this.filterNonNumeric(event.target.value);
@@ -151,6 +177,7 @@ export class ReclamosComponent {
     
   }
   onSubmit() {
-    console.log(this.data);
+    const formData = new FormData();
+    formData.append('file', this.Myfile!, this.Myfile!.name);    
   }
 }

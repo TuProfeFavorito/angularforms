@@ -92,7 +92,7 @@
             </div>
             <div class="formCore__row element-1">
                 <div class="formCore__input">
-                    <label for="menor">
+                    <label for="menor" class="labelflex">
                         <input type="checkbox" #myCheckbox (change)="onCheckboxChange(myCheckbox.checked)"/>
                         <p>Soy menor de edad</p>
                     </label>
@@ -161,8 +161,54 @@
             <div class="formCoreContent">
                 <div class="titlemy">
                     <h2>Detalle de la reclamación</h2>
-                </div>                
+                </div>
+                <div class="formCore__input">
+                    <label for="mensaje">Detalle del reclamo</label>
+                    <textarea id="mensaje" [(ngModel)]="data.detalle" name="mensaje"></textarea>
+                </div>
+                <div class="formCore__input">
+                    <label for="file">Adjunta un archivo</label>
+                    <input type="file" (change)="onFileSelected($event)">
+                </div>
             </div>
+            <div class="formCore__input">
+                <label for="cliente" class="labelflex">
+                    <input type="checkbox" #myCliente (change)="onCheckboxClientChange(myCliente.checked)" checked/>
+                    <p>Soy cliente</p>
+                </label>
+            </div>
+            <div class="formCore__row element-4">
+                <div class="formCore__input">
+                    <label for="cliente_contrato">Número de contrato</label>
+                    <input type="text" id="cliente_contrato" [(ngModel)]="data.cliente_contrato" name="cliente_contrato" [disabled]="disabledPoints"/>
+                </div>
+                <div class="formCore__input">
+                    <label for="cliente_grupo">Grupo</label>
+                    <input type="text" id="cliente_grupo" [(ngModel)]="data.cliente_grupo" name="cliente_grupo" [disabled]="disabledPoints"/>
+                </div>
+                <div class="formCore__input">
+                    <label for="cliente_cupo">Cupo</label>
+                    <input type="text" id="cliente_cupo" [(ngModel)]="data.cliente_cupo" name="cliente_cupo" [disabled]="disabledPoints"/>
+                </div>
+                <div class="formCore__input">
+                    <label for="cliente_respuesta">Deseo recibir mi respuesta por email o carta</label>
+                    <select id="cliente_respuesta" name="cliente_respuesta" [(ngModel)]="data.cliente_respuesta" required>
+                        <option value="EMAIL">Email</option>
+                        <option value="CARTA">Carta</option>
+                    </select>
+                </div>
+            </div>
+            <div class="formCore__row element-1">
+                <div class="formCore__input">
+                    <label for="terms" class="labelflex">
+                        <input type="checkbox" #myTerms (change)="onCheckboxTermsChange(myTerms.checked)" checked/>
+                        <p>He leído y acepto los términos y condiciones</p>
+                    </label>
+                </div>
+            </div>
+            <div class="formCore__input">
+                <button type="submit" class="btn" [disabled]="invalidbutton">Enviar</button>
+            </div> 
         </form>
     </div>
 </section>

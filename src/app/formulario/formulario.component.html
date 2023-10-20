@@ -75,13 +75,13 @@
                 <input type="file" (change)="onFileSelected($event)">
             </div>
             <div class="formCore__input">
-                <label for="terms">
+                <label for="terms" class="labelflex">
                     <input type="checkbox" #myCheckbox (change)="onCheckboxChange(myCheckbox.checked)" checked/>
                     <p>He leído y acepto los términos y condiciones</p>
                 </label>
             </div>
             <div class="formCore__input">
-                <button type="submit" class="btn">Enviar</button>
+                <button type="submit" class="btn" [disabled]="invalidbutton">Enviar</button>
             </div>        
         </form>
     </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TipodocService } from '../services/tipodoc.service';
 import { DepartamentosService } from '../services/ubigeo/departamentos.service';
 import { ProvinciasService } from '../services/ubigeo/provincias.service';
@@ -13,8 +14,10 @@ import { TiporequerimientoService } from '../services/tiporequerimiento.service'
   styleUrls: ['./formulario.component.scss']
 })
 export class FormularioComponent implements OnInit {
+  
   selectedTipoDoc: string = '';
   maxCaracteres: number = 8;
+  invalidbutton: boolean = false;
   tipoDoc: any[] = [];
   departamentos: any[] = [];
   provincias: any[] = [];
@@ -22,6 +25,7 @@ export class FormularioComponent implements OnInit {
   asociados: any[] = [];
   requerimientos: any[] = [];
   Myfile: File | null = null;
+  inputValue: string = '';
   data = {
     tipodocumento: '',
     num_documento: '',
@@ -47,7 +51,9 @@ export class FormularioComponent implements OnInit {
     private distritosService: DistritosService,
     private asociadoService: AsociadoService,
     private tiporequerimientoService: TiporequerimientoService    
-  ) {}  
+  ) {    
+   
+  }  
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
@@ -60,7 +66,8 @@ export class FormularioComponent implements OnInit {
   }
 
   onCheckboxChange(checked: boolean) {
-    this.data.terminos = (checked) ? "SI" : "NO";    
+    this.data.terminos = (checked) ? "SI" : "NO";
+    this.invalidbutton = (checked) ? false : true;
   }
   
   onDepartamentoChange(event: Event) {
@@ -97,6 +104,10 @@ export class FormularioComponent implements OnInit {
     return value.replace(/[^0-9]/g, '');
   }
 
+  isInputEmpty(): boolean {
+    return this.inputValue.trim() === '';
+  }
+
   onInputNumber(event: any) {
     // No permitir que se ingresen letras
     const numericValue = this.filterNonNumeric(event.target.value);
@@ -125,7 +136,6 @@ export class FormularioComponent implements OnInit {
 
   onSubmit() {
     const formData = new FormData();
-    formData.append('file', this.Myfile!, this.Myfile!.name);
-    formData.append('file', this.Myfile!, this.Myfile!.name);
+    formData.append('file', this.Myfile!, this.Myfile!.name);    
   }
 }
